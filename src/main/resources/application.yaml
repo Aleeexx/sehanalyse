@@ -1,0 +1,7 @@
+camunda.bpm.admin-user:
+  id: asd
+  password: asd
+
+spring:
+  datasource:
+    url: jdbc:h2:file:/Users/alexandereuler/Projects/FH/sehanalyse/db/camundaDB
