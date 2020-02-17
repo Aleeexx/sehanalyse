@@ -1,7 +1,11 @@
 camunda.bpm.admin-user:
-  id: asd
+  id: Alex
   password: asd
 
 spring:
   datasource:
     url: jdbc:h2:file:/Users/alexandereuler/Projects/FH/sehanalyse/db/camundaDB
+
+email:
+  host: mail.fh-muenster.de
+  sender: donotreply@fh-muenster.de

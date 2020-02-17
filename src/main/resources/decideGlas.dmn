@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definitions xmlns="http://www.omg.org/spec/DMN/20151101/dmn.xsd" xmlns:camunda="http://camunda.org/schema/1.0/dmn" id="Definitions_0i7zmt9" name="DRD" namespace="http://camunda.org/schema/1.0/dmn" exporter="Camunda Modeler" exporterVersion="3.6.0">
+  <decision id="decideGlasTypeDMN" name="Entscheide Glasart">
+    <decisionTable id="decisionTable_1">
+      <input id="input_1" label="Sind Zentrierdaten im Normbereich?" camunda:inputVariable="is_centering_data_normal">
+        <inputExpression id="inputExpression_1" typeRef="boolean">
+          <text></text>
+        </inputExpression>
+      </input>
+      <output id="output_1" label="Glasart" name="glas_type" typeRef="string" />
+      <rule id="DecisionRule_0vpvy1r">
+        <inputEntry id="UnaryTests_00f6mwi">
+          <text>true</text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_0nd8v4h">
+          <text></text>
+        </outputEntry>
+      </rule>
+      <rule id="DecisionRule_0wiivvk">
+        <inputEntry id="UnaryTests_1k4ix7k">
+          <text>false</text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_1d7lbfy">
+          <text>"individual"</text>
+        </outputEntry>
+      </rule>
+    </decisionTable>
+  </decision>
+</definitions>
