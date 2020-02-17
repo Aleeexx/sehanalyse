@@ -13,7 +13,7 @@
           <text>true</text>
         </inputEntry>
         <outputEntry id="LiteralExpression_0nd8v4h">
-          <text></text>
+          <text>${glas_type}</text>
         </outputEntry>
       </rule>
       <rule id="DecisionRule_0wiivvk">

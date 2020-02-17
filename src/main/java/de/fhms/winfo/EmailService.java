@@ -15,7 +15,7 @@ public class EmailService {
     @Value("${email.host}")    private String host;
     @Value("${email.sender}")  private String sender;
 
-    public boolean sendEmail(String to, String subject, String message) {
+    public void sendEmail(String to, String subject, String message) {
         try {
             Email email = new SimpleEmail();
             email.setHostName(host);
@@ -24,13 +24,10 @@ public class EmailService {
             email.setMsg(message);
             email.addTo(to);
             email.send();
-            LOGGER.info("Email \'" + subject + "\' gesendet an  " + to + ".");
+            LOGGER.info("E-Mail wurde an " + to + " mit dem Betreff \"" + subject + "\" gesendet.");
 
         } catch  (Exception e) {
-            LOGGER.warning("Email konnte nicht gesendet werden:" + e.getMessage());
-            return false;
+            LOGGER.warning("E-Mil konnte nicht gesendet werden:" + e.getMessage());
         }
-        return true;
     }
-
 }

@@ -63,11 +63,7 @@
           </camunda:formField>
           <camunda:formField id="has_glasses" label="Besitzen Sie eine Brille?" type="boolean" defaultValue="false" />
           <camunda:formField id="vision_problems" label="Was für Sehprobleme haben Sie?" type="string" />
-          <camunda:formField id="night_vision_problems" label="Haben Sie nachts Probleme zu sehen?" type="boolean">
-            <camunda:validation>
-              <camunda:constraint name="required" />
-            </camunda:validation>
-          </camunda:formField>
+          <camunda:formField id="night_vision_problems" label="Haben Sie nachts Probleme zu sehen?" type="boolean" />
           <camunda:formField id="living_environment" label="In welchen Lebensbereichen finden Sie sich am ehesten wieder?" type="enum">
             <camunda:validation>
               <camunda:constraint name="required" />
@@ -136,11 +132,7 @@
     <bpmn:userTask id="create_avatar" name="Avatar erstellen" camunda:candidateGroups="optometrist">
       <bpmn:extensionElements>
         <camunda:formData>
-          <camunda:formField id="is_centering_data_normal" label="Sind die Zentrierdaten im Normbereich?" type="boolean">
-            <camunda:validation>
-              <camunda:constraint name="required" />
-            </camunda:validation>
-          </camunda:formField>
+          <camunda:formField id="is_centering_data_normal" label="Sind die Zentrierdaten im Normbereich?" type="boolean" />
         </camunda:formData>
       </bpmn:extensionElements>
       <bpmn:incoming>SequenceFlow_032f3w1</bpmn:incoming>
@@ -166,7 +158,7 @@
     <bpmn:sequenceFlow id="SequenceFlow_1b08iiq" sourceRef="ExclusiveGateway_08150s5" targetRef="decideGlas" />
     <bpmn:sequenceFlow id="SequenceFlow_0063tws" sourceRef="ExclusiveGateway_08150s5" targetRef="ExclusiveGateway_1xswb7f" />
     <bpmn:sequenceFlow id="SequenceFlow_1630b3w" sourceRef="create_avatar" targetRef="ExclusiveGateway_08150s5" />
-    <bpmn:scriptTask id="set_glas_material" name="Glasmaterial festlegen" scriptFormat="groovy" camunda:resultVariable="glas_material">
+    <bpmn:scriptTask id="set_glas_material" name="Kunststoffgläser festlegen" scriptFormat="groovy" camunda:resultVariable="glas_material">
       <bpmn:incoming>SequenceFlow_1xoj6w1</bpmn:incoming>
       <bpmn:outgoing>SequenceFlow_06ci0i9</bpmn:outgoing>
       <bpmn:ioSpecification>
@@ -174,7 +166,7 @@
         <bpmn:inputSet name="DefaultInputSet" />
         <bpmn:outputSet name="DefaultOutputSet" />
       </bpmn:ioSpecification>
-      <bpmn:script>Kunststoffgläser</bpmn:script>
+      <bpmn:script>return "Kunststoffgläser"</bpmn:script>
     </bpmn:scriptTask>
     <bpmn:sequenceFlow id="SequenceFlow_06ci0i9" sourceRef="set_glas_material" targetRef="ExclusiveGateway_1bl09bt" />
     <bpmn:businessRuleTask id="decideGlas" name="Glasart festlegen" camunda:resultVariable="glas_type" camunda:decisionRef="decideGlasTypeDMN" camunda:mapDecisionResult="singleEntry">
@@ -188,7 +180,7 @@
       <bpmn:outgoing>SequenceFlow_0ajblfr</bpmn:outgoing>
     </bpmn:exclusiveGateway>
     <bpmn:sequenceFlow id="SequenceFlow_1xoj6w1" name="Ja" sourceRef="ExclusiveGateway_1xswb7f" targetRef="set_glas_material">
-      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">${dioptrien &gt;= 6 &amp;&amp; dioptrien &lt;= -6}</bpmn:conditionExpression>
+      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">${dioptrien &gt;= 6 || dioptrien &lt;= -6}</bpmn:conditionExpression>
     </bpmn:sequenceFlow>
     <bpmn:sequenceFlow id="SequenceFlow_0ajblfr" name="Nein" sourceRef="ExclusiveGateway_1xswb7f" targetRef="Task_0j4860x">
       <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">${dioptrien &lt; 6 &amp;&amp; dioptrien &gt; -6}</bpmn:conditionExpression>
@@ -200,10 +192,10 @@
     </bpmn:exclusiveGateway>
     <bpmn:sequenceFlow id="SequenceFlow_0gs6hw4" sourceRef="Task_0j4860x" targetRef="ExclusiveGateway_1bl09bt" />
     <bpmn:sequenceFlow id="SequenceFlow_14v22nh" sourceRef="ExclusiveGateway_1bl09bt" targetRef="ExclusiveGateway_06drpox" />
-    <bpmn:scriptTask id="Task_0j4860x" name="Mineralische Gläser festlegen" camunda:resultVariable="glas_material">
+    <bpmn:scriptTask id="Task_0j4860x" name="Mineralische Gläser festlegen" scriptFormat="groovy" camunda:resultVariable="glas_material">
       <bpmn:incoming>SequenceFlow_0ajblfr</bpmn:incoming>
       <bpmn:outgoing>SequenceFlow_0gs6hw4</bpmn:outgoing>
-      <bpmn:script>Mineralische Gläser</bpmn:script>
+      <bpmn:script>return "Mineralische Gläser"</bpmn:script>
     </bpmn:scriptTask>
   </bpmn:process>
   <bpmn:message id="sid-11F6F473-640E-45C0-B242-79AD85A1C3D8" name="Generierte &#10;Dokumente" />

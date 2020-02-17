@@ -26,9 +26,6 @@ public class SendBookletDelegate implements JavaDelegate {
                 + execution.getVariable("last_name");
         String message = (String) execution.getVariable("booklet");
 
-        boolean isSent = emailService.sendEmail(to, subject, message);
-
-        if(isSent) LOGGER.info("Analyse E-Booklet erfolgreich gesendet.");
-        else LOGGER.info("Analyse E-Booklet konnte nicht gesendet werden.");
+        emailService.sendEmail(to, subject, message);
     }
 }
